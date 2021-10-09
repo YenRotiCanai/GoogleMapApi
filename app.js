@@ -75,10 +75,16 @@ function initMap(){
 */
 
     function addMarker(property){
+        var icon = {
+            url:property.icon,
+            scaledSize: new google.maps.Size(100,100),
+            origin: new google.maps.Point(0,0),
+            anchor: new google.maps.Point(0,0)
+        }
         const marker = new google.maps.Marker({
             map: map,
             position: property.location,
-            icon: property.icon
+            icon: icon
         })
         const detailWindow = new google.maps.InfoWindow({
             content: property.name
