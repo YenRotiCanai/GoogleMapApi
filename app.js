@@ -23,10 +23,14 @@ function initMap(){
     }
 
     //餐廳
-    const R1_yashuzhai = new Rest_Info({lat:24.794388261674445, lng: 121.00012480028795}, `<h2>雅素齋自然人文蔬食館</h2>`, "/icon/Picture1_ya.png");
-    const R2_jingding = new Rest_Info({lat:24.80694440021254, lng: 120.96717814114272}, `<h2>井町日式蔬食料理</h2>`, "/icon/Picture2_jing.png");
-    const R3_jiazhen =  new Rest_Info({lat:24.799638469920698, lng: 120.95316545574171}, `<h2>家蓁素食自助餐</h2>`, "/icon/Picture3_jia.png");
-    const R4_zixin = new Rest_Info({lat:24.871209418461, lng: 120.993891846625}, `<h2>子欣素食</h2>`, "/icon/Picture4_zi.png");
+    const R1_yashuzhai = new Rest_Info({lat:24.794388261674445, lng: 121.00012480028795}, "雅素齋自然人文蔬食館","/icon/Picture1_ya.png");
+    const R2_jingding = new Rest_Info({lat:24.80694440021254, lng: 120.96717814114272}, "井町日式蔬食料理", "/icon/Picture2_jing.png");
+    const R3_jiazhen =  new Rest_Info({lat:24.799638469920698, lng: 120.95316545574171}, "家蓁素食自助餐", "/icon/Picture3_jia.png");
+    const R4_zixin = new Rest_Info({lat:24.871209418461, lng: 120.993891846625}, "子欣素食", "/icon/Picture4_zi.png");
+
+    var golabel = new Boolean(true);
+    const from = document.getElementById('from');
+    const to = document.getElementById('to');
 
     function addMarker(property){
         var icon = {
@@ -44,7 +48,13 @@ function initMap(){
             content: property.name
         });
         marker.addListener("click", (mapsMouseEvent)=>{
-            detailWindow.close();
+            if(golabel){
+                from.value = property.name;
+                golabel = false;
+            }else{
+                to.value = property.name;
+                golabel = true;
+            }
             detailWindow.open(map, marker);
         })
     }

@@ -4,10 +4,23 @@
         <meta name="view-port" content="width=device-width", initial-scale="1.0">
         <title>Google Map Api</title>
 
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-uWxY/CJNBR+1zjPWmfnSnVxwRheevXITnMqoEIeG1LJrdI0GlVs/9cVSyPYXdcSF" crossorigin="anonymous">
         <link rel="stylesheet" href="/style.css">
     </head>
     <body>
-        <h1>Google Maps 1111222</h1>
+        <div class="container-fluid">
+            <div class="row align-items-center">
+              <div class="col">
+                <h1>Google Maps</h1>
+              </div>
+              <div class="col">
+                <input class="form-control" type="text" id="from" value="Origin" aria-label="readonly input example" readonly>
+              </div>
+              <div class="col">
+                <input class="form-control" type="text" id="to" value="Destination" aria-label="readonly input example" readonly>
+              </div>
+            </div>
+          </div>
 
         <div id="map"></div>
 
