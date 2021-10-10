@@ -1,8 +1,11 @@
+var go_label = new Boolean(true);
+
+
 function initMap(){
-    
+
     var directionsService = new google.maps.DirectionsService();
     var directionsRenderer = new google.maps.DirectionsRenderer();
-
+    
     //地圖設定
     var options = {
         center: {lat:24.82434674639735, lng:121.00141682492709},
@@ -28,7 +31,6 @@ function initMap(){
     const R3_jiazhen =  new Rest_Info({lat:24.799638469920698, lng: 120.95316545574171}, "家蓁素食自助餐", "/icon/Picture3_jia.png");
     const R4_zixin = new Rest_Info({lat:24.871209418461, lng: 120.993891846625}, "子欣素食", "/icon/Picture4_zi.png");
 
-    var golabel = new Boolean(true);
     const from = document.getElementById('from');
     const to = document.getElementById('to');
 
@@ -44,18 +46,21 @@ function initMap(){
             position: property.location,
             icon: icon
         })
-        const detailWindow = new google.maps.InfoWindow({
-            content: property.name
-        });
+
+        //show restaurant name above the marker
+        // const detailWindow = new google.maps.InfoWindow({
+        //     content: property.name
+        // });
+
         marker.addListener("click", (mapsMouseEvent)=>{
-            if(golabel){
+            if(go_label){
                 from.value = property.name;
-                golabel = false;
+                go_label = false;
             }else{
                 to.value = property.name;
-                golabel = true;
+                go_label = true;
             }
-            detailWindow.open(map, marker);
+            //detailWindow.open(map, marker);
         })
     }
 
@@ -65,7 +70,24 @@ function initMap(){
     addMarker(R4_zixin);
 }
 
-// function calcRoute(){
-//     var start = 
-//     vvv
-// }
+function calcRoute(){
+    directionsService
+    .route({
+        origin:{
+            query: document.getElementById("from").value,
+        },
+        destination:{
+            query: document.getElementById("to").value,
+        },
+        travelMode: google.maps.TravelMode.DRIVING,
+    })
+    .then((response) => {
+        directionsRenderer.setDirections(response);
+    })
+}
+
+function clearRoute(){
+    from.value = "";
+    to.value = "";
+    go_label = true;
+}

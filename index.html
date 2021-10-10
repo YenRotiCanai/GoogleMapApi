@@ -19,13 +19,22 @@
               <div class="col">
                 <input class="form-control" type="text" id="to" value="Destination" aria-label="readonly input example" readonly>
               </div>
+              <div class="col">
+                <div class="row justify-content-end">
+                  <button type="button" class="btn btn-primary" readonly onclick="calcRoute()">Navigate</button>
+                </div>
+              </div>
+              <div class="col">
+                <div class="row justify-content-end">
+                  <button type="button" class="btn btn-secondary" onclick="clearRoute()">Clear</button>
+                </div>
+              </div>
             </div>
           </div>
 
         <div id="map"></div>
-
-        <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBR2TL-7XibVRMbpjzkVDyLJzFQ390mAes&callback=initMap">
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBR2TL-7XibVRMbpjzkVDyLJzFQ390mAes">
         </script>
-        <script src="/app.js"></script>
+        <script src="/app2.js"></script>
     </body>
 </html>
