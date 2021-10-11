@@ -62,6 +62,8 @@ function changeOrigin(){
 	}
 }
 
+
+
 //-------------------------------//
 
 var go_label = new Boolean(true);
@@ -95,8 +97,11 @@ const R2_jingding = new Rest_Info({lat:24.80694440021254, lng: 120.9671781411427
 const R3_jiazhen =  new Rest_Info({lat:24.799638469920698, lng: 120.95316545574171}, "家蓁素食自助餐", "/icon/Picture3_jia.png");
 const R4_zixin = new Rest_Info({lat:24.871209418461, lng: 120.993891846625}, "子欣素食", "/icon/Picture4_zi.png");
 
-const from = document.getElementById('from');
-const to = document.getElementById('to');
+let markers = [];
+addMarker(R1_yashuzhai);
+addMarker(R2_jingding);
+addMarker(R3_jiazhen);
+addMarker(R4_zixin);
 
 function addMarker(property){
     var icon = {
@@ -109,7 +114,9 @@ function addMarker(property){
         map: map,
         position: property.location,
         icon: icon
-    })
+    });
+
+    markers.push(marker);
 
     //show restaurant name above the marker
     // const detailWindow = new google.maps.InfoWindow({
@@ -128,10 +135,19 @@ function addMarker(property){
     // })
 }
 
-addMarker(R1_yashuzhai);
-addMarker(R2_jingding);
-addMarker(R3_jiazhen);
-addMarker(R4_zixin);
+function setMapOnAll(map){
+    for(let i=0; i<markers.length; i++){
+        markers[i].setMap(map);
+    }
+}
+
+function changeMarker(){
+    if(document.getElementById("flexSwitchCheckChecked").checked){
+        setMapOnAll(map);
+    }else{
+        setMapOnAll(null);
+    }
+}
 
 function calcRoute(){
 
