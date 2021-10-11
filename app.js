@@ -1,12 +1,12 @@
 const L0 = ('<div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-0" value="梅竹山莊"><label class="form-check-label" for="formCheck-1">梅竹山莊</label></div>');
 const L1 = ('<div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-1" value="帝國經貿大樓"><label class="form-check-label" for="formCheck-1">帝國經貿大樓</label></div>');
-const L2 = ('<div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-2" value="民享街26號"><label class="form-check-label" for="formCheck-1">民享街26號</label></div>');
+const L2 = ('<div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-2" value="新竹市東區民享街26號"><label class="form-check-label" for="formCheck-1">民享街26號</label></div>');
 const L3 = ('<div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-3" value="聯發科技總部"><label class="form-check-label" for="formCheck-1">聯發科技總部</label></div>')
 const L4 = ('<div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-4" value="河堤上的貓"><label class="form-check-label" for="formCheck-1">河堤上的貓</label></div>');
 const L5 = ('<div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-5" value="新竹市政府"><label class="form-check-label" for="formCheck-1">新竹市政府</label></div>');
 const L6 = ('<div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-6" value="新竹火車站"><label class="form-check-label" for="formCheck-1">新竹火車站</label></div>')
 const L7 = ('<div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-7" value="慈濟新竹靜思堂"><label class="form-check-label" for="formCheck-1">慈濟新竹靜思堂</label></div>');
-const L8 = ('<div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-8" value="百揚陽光宮廷一期社區"><label class="form-check-label" for="formCheck-1">百揚陽光宮廷一期社區</label></div>');
+const L8 = ('<div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-8" value="300新竹市香山區中山路640巷435弄1號"><label class="form-check-label" for="formCheck-1">陽光別墅</label></div>');
 const L9 = ('<div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-9" value="百臻觀"><label class="form-check-label" for="formCheck-1">百臻觀</label></div>')
 const L10 = ('<div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-10" value="明新科技大學"><label class="form-check-label" for="formCheck-1">明新科技大學</label></div>')
 const L11 = ('<div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-11" value="三陽工業股份有限公司"><label class="form-check-label" for="formCheck-1">三陽工業股份有限公司</label></div>')
@@ -158,9 +158,35 @@ function calcRoute(){
         waypoints: waypts,
         optimizeWaypoints: true,
         travelMode: google.maps.TravelMode.DRIVING,
+        unitSystem: google.maps.UnitSystem.METRIC
     })
     .then((response) => {
         directionsRenderer.setDirections(response);
+
+        const route = response.routes[0];
+        const summaryPanel = document.getElementById("collapse-1");
+
+        summaryPanel.innerHTML = "";
+
+        var totalDistance = 0;
+
+        // For each route, display summary information.
+        for (let i = 0; i < route.legs.length; i++) {
+            const routeSegment = i + 1;
+
+            summaryPanel.innerHTML +=
+            "<b>Route Segment: " + routeSegment + "</b><br>";
+            summaryPanel.innerHTML += route.legs[i].start_address + " to ";
+            summaryPanel.innerHTML += route.legs[i].end_address + "<br>";
+            summaryPanel.innerHTML += route.legs[i].distance.text + "<br><br>";
+            totalDistance += route.legs[i].distance.value/1000;
+            console.log(route.legs[i].distance.text);
+            console.log("Distance: " + totalDistance);
+        }
+
+        totalDistance = Math.round(totalDistance*10)/10;
+        console.log("Total Distance: " + totalDistance);
+        document.getElementById("totalDistance").innerHTML = totalDistance + " km";
     })
 }
 
