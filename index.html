@@ -6,11 +6,8 @@
 
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-uWxY/CJNBR+1zjPWmfnSnVxwRheevXITnMqoEIeG1LJrdI0GlVs/9cVSyPYXdcSF" crossorigin="anonymous">
         <link rel="stylesheet" href="/style.css">
-        <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700">
-        <link rel="stylesheet" href="assets/css/Header-Blue.css">
-        <link rel="stylesheet" href="assets/css/Navigation-Clean.css">
-        <link rel="stylesheet" href="assets/css/styles.css">
+
     </head>
     <body>
       	<nav class="navbar navbar-light navbar-expand-md bg-success bg-gradient navigation-clean">
@@ -21,12 +18,17 @@
 						<li class="nav-item"><a class="nav-link" href="#">Second Item</a></li>
 						<li class="nav-item"><a class="nav-link" href="#">Third Item</a></li>
 						<li class="nav-item dropdown"><a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#">Dropdown </a>
-							<div class="dropdown-menu"><a class="dropdown-item" href="#">First Item</a><a class="dropdown-item" href="#">Second Item</a><a class="dropdown-item" href="#">Third Item</a></div>
+							<div class="dropdown-menu">
+								<a class="dropdown-item" href="#">First Item</a>
+								<a class="dropdown-item" href="#">Second Item</a>
+								<a class="dropdown-item" href="#">Third Item</a>
+							</div>
 						</li>
 					</ul>
 				</div>
 			</div>
 		</nav>
+
         <div class="container">
 			<div class="col">
 				<div class="row" style="padding-top: 10px;padding-bottom: 10px;">
@@ -34,8 +36,14 @@
 						<h4>Origin:</h4>
 					</div>
 					<div class="col d-flex align-items-center align-self-center">
-						<div class="dropdown"><button class="btn btn-primary dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button">Dropdown </button>
-							<div class="dropdown-menu"><a class="dropdown-item" href="#">First Item</a><a class="dropdown-item" href="#">Second Item</a><a class="dropdown-item" href="#">Third Item</a><a class="dropdown-item" href="#">Fourth item</a></div>
+						<div class="select">
+							<select class="form-select" id="origin" onchange="changeOrigin()" aria-label="Default select example">
+								<option value="0">請選擇餐廳</option>
+								<option value="雅素齋自然人文蔬食館">雅素齋自然人文蔬食館</option>
+								<option value="井町日式蔬食料理">井町日式蔬食料理</option>
+								<option value="家蓁素食自助餐">家蓁素食自助餐</option>
+								<option value="子欣素食">子欣素食</option>
+							</select>
 						</div>
 					</div>
 				</div>
@@ -45,23 +53,29 @@
 					</div>
 					<div class="col d-flex align-items-center align-self-center">
 						<div class="row">
-							<div class="col">
-								<div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-1"><label class="form-check-label" for="formCheck-1">Label 1</label></div>
+							<div class="col" id="label_list">
+								<!-- <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-1"><label class="form-check-label" for="formCheck-1">Label 1</label></div>
 								<div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-6"><label class="form-check-label" for="formCheck-1">Label 2</label></div>
 								<div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-5"><label class="form-check-label" for="formCheck-1">Label 3</label></div>
 								<div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-4"><label class="form-check-label" for="formCheck-1">Label 4</label></div>
 								<div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-3"><label class="form-check-label" for="formCheck-1">Label 5</label></div>
 								<div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-2"><label class="form-check-label" for="formCheck-1">Label 6</label></div>
-								<div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-1"><label class="form-check-label" for="formCheck-1">Label 7</label></div>
+								<div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-1"><label class="form-check-label" for="formCheck-1">Label 7</label></div> -->
 							</div>
 						</div>
 					</div>
 				</div>
 				<div class="row">
-					<div class="col d-flex justify-content-center align-items-lg-center"><button class="btn btn-primary" type="button" style="width: 100px;margin-right: 10px;margin-left: 10px;">Confirm</button><button class="btn btn-secondary" type="button" style="width: 100px;margin-right: 10px;margin-left: 10px;">Clear</button></div>
+					<div class="col d-flex justify-content-center align-items-lg-center">
+						<button class="btn btn-primary" type="button" onclick="calc()" style="width: 150px;margin-right: 10px;margin-left: 10px;">Confirm</button>
+						<button class="btn btn-secondary" type="button" onclick="uncheck()" style="width: 150px;margin-right: 10px;margin-left: 10px;">Clear Selection</button>
+					</div>
 				</div>
 			</div>
-		</div><iframe allowfullscreen="" frameborder="0" src="https://cdn.bootstrapstudio.io/placeholders/map.html" width="100%" height="400"></iframe>
+		</div>
+		<!-- <iframe allowfullscreen="" frameborder="0" src="https://cdn.bootstrapstudio.io/placeholders/map.html" width="100%" height="400"></iframe> -->
+		<div id="map"></div>
+
 		<div class="container" style="background: #86f8ff;">
 			<h1 class="text-center" style="padding-top: 5%;">Result</h1>
 			<div class="row">
@@ -91,10 +105,10 @@
 			</div>
 		</div>
 
-        <div id="map"></div>
-        <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBR2TL-7XibVRMbpjzkVDyLJzFQ390mAes">
-        </script> -->
+        
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBR2TL-7XibVRMbpjzkVDyLJzFQ390mAes">
+        </script>
         <script src="/app.js"></script>
-		<script src="assets/bootstrap/js/bootstrap.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     </body>
 </html>

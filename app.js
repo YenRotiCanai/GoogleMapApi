@@ -1,3 +1,69 @@
+const L0 = ('<div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-0" value="梅竹山莊"><label class="form-check-label" for="formCheck-1">梅竹山莊</label></div>');
+const L1 = ('<div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-1" value="帝國經貿大樓"><label class="form-check-label" for="formCheck-1">帝國經貿大樓</label></div>');
+const L2 = ('<div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-2" value="民享街26號"><label class="form-check-label" for="formCheck-1">民享街26號</label></div>');
+const L3 = ('<div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-3" value="聯發科技總部"><label class="form-check-label" for="formCheck-1">聯發科技總部</label></div>')
+const L4 = ('<div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-4" value="河堤上的貓"><label class="form-check-label" for="formCheck-1">河堤上的貓</label></div>');
+const L5 = ('<div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-5" value="新竹市政府"><label class="form-check-label" for="formCheck-1">新竹市政府</label></div>');
+const L6 = ('<div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-6" value="新竹火車站"><label class="form-check-label" for="formCheck-1">新竹火車站</label></div>')
+const L7 = ('<div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-7" value="慈濟新竹靜思堂"><label class="form-check-label" for="formCheck-1">慈濟新竹靜思堂</label></div>');
+const L8 = ('<div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-8" value="百揚陽光宮廷一期社區"><label class="form-check-label" for="formCheck-1">百揚陽光宮廷一期社區</label></div>');
+const L9 = ('<div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-9" value="百臻觀"><label class="form-check-label" for="formCheck-1">百臻觀</label></div>')
+const L10 = ('<div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-10" value="明新科技大學"><label class="form-check-label" for="formCheck-1">明新科技大學</label></div>')
+const L11 = ('<div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-11" value="三陽工業股份有限公司"><label class="form-check-label" for="formCheck-1">三陽工業股份有限公司</label></div>')
+const L12 = ('<div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-12" value="華淵電機工業股份有限公司"><label class="form-check-label" for="formCheck-1">華淵電機工業股份有限公司</label></div>')
+const L13 = ('<div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-13" value="新竹縣立忠孝國民中學"><label class="form-check-label" for="formCheck-1">新竹縣立忠孝國民中學</label></div>')
+
+const group1 = L0+L1+L2+L3;
+const group2 = L4+L5+L6;
+const group3 = L7+L8+L9;
+const group4 = L10+L11+L12+L13;
+
+var checked_dest = [];
+
+function calc(){
+    checked_dest = [];
+	const checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
+	console.log("length: " + checkboxes.length);
+	
+	checkboxes.forEach((checkbox) => {
+		checked_dest.push(checkbox.value);
+	});
+	console.log(checked_dest);
+
+    calcRoute();
+}
+
+function uncheck(){
+	const chkboxs = document.querySelectorAll('input[type="checkbox"]:checked');
+	chkboxs.forEach((cb)=>{
+		cb.checked = false;
+	});
+}
+
+function changeOrigin(){
+	const origin = document.getElementById("origin").value;
+	console.log(origin);
+	switch(origin){
+        case '0':
+			document.getElementById("label_list").innerHTML = "";
+			break;
+		case '雅素齋自然人文蔬食館':
+			document.getElementById("label_list").innerHTML = group1;
+			break;
+		case '井町日式蔬食料理':
+			document.getElementById("label_list").innerHTML = group2;
+			break;
+		case '家蓁素食自助餐':
+			document.getElementById("label_list").innerHTML = group3;
+			break;
+        case '子欣素食':
+            document.getElementById("label_list").innerHTML = group4;
+            break;
+	}
+}
+
+//-------------------------------//
+
 var go_label = new Boolean(true);
 
 //地圖設定
@@ -50,16 +116,16 @@ function addMarker(property){
     //     content: property.name
     // });
 
-    marker.addListener("click", (mapsMouseEvent)=>{
-        if(go_label){
-            from.value = property.name;
-            go_label = false;
-        }else{
-            to.value = property.name;
-            go_label = true;
-        }
-        //detailWindow.open(map, marker);
-    })
+    // marker.addListener("click", (mapsMouseEvent)=>{
+    //     if(go_label){
+    //         from.value = property.name;
+    //         go_label = false;
+    //     }else{
+    //         to.value = property.name;
+    //         go_label = true;
+    //     }
+    //     //detailWindow.open(map, marker);
+    // })
 }
 
 addMarker(R1_yashuzhai);
@@ -68,14 +134,29 @@ addMarker(R3_jiazhen);
 addMarker(R4_zixin);
 
 function calcRoute(){
+
+    const waypts = [];
+    for(let i=0; i < checked_dest.length-1; i++){
+        waypts.push({
+            location: checked_dest[i],
+            stopover:true
+        });
+    }
+    console.log("waypts: " + waypts);
+    console.log("origin: " + document.getElementById("origin").value);
+    console.log("dest: " + checked_dest[checked_dest.length-1]);
+
+
     directionsService
     .route({
         origin:{
-            query: document.getElementById("from").value,
+            query: document.getElementById("origin").value,
         },
         destination:{
-            query: document.getElementById("to").value,
+            query: checked_dest[checked_dest.length-1],
         },
+        waypoints: waypts,
+        optimizeWaypoints: true,
         travelMode: google.maps.TravelMode.DRIVING,
     })
     .then((response) => {
