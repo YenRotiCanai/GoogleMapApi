@@ -1,3 +1,58 @@
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.1.2/firebase-app.js";
+import { getDatabase, ref, set, update, remove } from "https://www.gstatic.com/firebasejs/9.1.2/firebase-database.js";
+
+const firebaseConfig = {
+    apiKey: "AIzaSyA90qw12czw-1Sqhld4HknBD4gYeUmNMP0",
+    authDomain: "maptestfirebase-72508.firebaseapp.com",
+    databaseURL: "https://maptestfirebase-72508-default-rtdb.asia-southeast1.firebasedatabase.app",
+    projectId: "maptestfirebase-72508",
+    storageBucket: "maptestfirebase-72508.appspot.com",
+    messagingSenderId: "222097511558",
+    appId: "1:222097511558:web:673ddc6a5f33948859ed07",
+    measurementId: "G-M8F1W4C480"
+  };
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const db = getDatabase();
+
+//新增餐廳
+function addRestaurant(name, phone, address){
+    set(ref(db, 'restaurant/'+name), {
+        rName: name,
+        rPhone: phone,
+        rAddress: address
+    });
+}
+
+// addRestaurant('雅素齋自然人文蔬食館', '035718222', '300新竹市東區光復路二段214號');
+// addRestaurant('井町日式蔬食料理', '035253158', '300新竹市北區大同路135號');
+// addRestaurant('家蓁素食自助餐', '035309640', '300新竹市香山區牛埔路106號');
+// addRestaurant('子欣素食', '035590661', '304新竹縣新豐鄉建興路一段51巷10號')
+
+//新增參賽者
+function addContestant(name, phone, address){
+    set(ref(db, 'contestant/'+name), {
+        cName: name,
+        cPhone: phone,
+        cAddress: address
+    });
+}
+
+// addContestant('梅竹山莊', '035718366', '300新竹市東區大學路50號300');
+
+function updateData(name, phone, address){
+    update(ref(db, 'contestant/'+name), {
+        cName: name,
+        cPhone: phone,
+        cAddress: address
+    });
+}
+
+// updateData('梅竹山莊', '035718366', '300新竹市東區大學路50號300')
+
+
+
 const L0 = ('<div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-0" name="label_list" value="梅竹山莊"><label class="form-check-label" for="formCheck-1">梅竹山莊</label></div>');
 const L1 = ('<div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-1" name="label_list" value="帝國經貿大樓"><label class="form-check-label" for="formCheck-1">帝國經貿大樓</label></div>');
 const L2 = ('<div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-2" name="label_list" value="新竹市東區民享街26號"><label class="form-check-label" for="formCheck-1">民享街26號</label></div>');
