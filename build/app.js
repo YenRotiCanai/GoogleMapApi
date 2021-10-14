@@ -1,7 +1,6 @@
+// firebase 資料庫相關
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.1.2/firebase-app.js";
 import { getDatabase, ref, set, update, remove } from "https://www.gstatic.com/firebasejs/9.1.2/firebase-database.js";
-
-
 
 const firebaseConfig = {
     apiKey: "AIzaSyA90qw12czw-1Sqhld4HknBD4gYeUmNMP0",
@@ -18,21 +17,16 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getDatabase();
 
-
-
 //新增餐廳
-function addRestaurant(name, phone, address){
-    set(ref(db, 'restaurant/'+name), {
-        rName: name,
-        rPhone: phone,
-        rAddress: address
-    });
-}
+// function addRestaurant(name, phone, address){
+//     set(ref(db, 'restaurant/'+name), {
+//         rName: name,
+//         rPhone: phone,
+//         rAddress: address
+//     });
+// }
 
 // addRestaurant('雅素齋自然人文蔬食館', '035718222', '300新竹市東區光復路二段214號');
-// addRestaurant('井町日式蔬食料理', '035253158', '300新竹市北區大同路135號');
-// addRestaurant('家蓁素食自助餐', '035309640', '300新竹市香山區牛埔路106號');
-// addRestaurant('子欣素食', '035590661', '304新竹縣新豐鄉建興路一段51巷10號')
 
 //新增參賽者
 function addContestant(name, phone, address){
@@ -45,16 +39,15 @@ function addContestant(name, phone, address){
 
 // addContestant('梅竹山莊', '035718366', '300新竹市東區大學路50號300');
 
-function updateData(name, phone, address){
-    update(ref(db, 'contestant/'+name), {
-        cName: name,
-        cPhone: phone,
-        cAddress: address
-    });
-}
+// function updateData(name, phone, address){
+//     update(ref(db, 'contestant/'+name), {
+//         cName: name,
+//         cPhone: phone,
+//         cAddress: address
+//     });
+// }
 
 // updateData('梅竹山莊', '035718366', '300新竹市東區大學路50號300')
-
 
 // let go_label = true;
 
@@ -72,8 +65,7 @@ let directionsRenderer = new google.maps.DirectionsRenderer();
 
 directionsRenderer.setMap(map);
 
-
-
+//TODO: 改成從資料庫抓 data--------/
 const L0 = ('<div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-0" name="label_list" value="梅竹山莊"><label class="form-check-label" for="formCheck-1">梅竹山莊</label></div>');
 const L1 = ('<div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-1" name="label_list" value="帝國經貿大樓"><label class="form-check-label" for="formCheck-1">帝國經貿大樓</label></div>');
 const L2 = ('<div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-2" name="label_list" value="新竹市東區民享街26號"><label class="form-check-label" for="formCheck-1">民享街26號</label></div>');
@@ -93,7 +85,9 @@ const group1 = L0+L1+L2+L3;
 const group2 = L4+L5+L6;
 const group3 = L7+L8+L9;
 const group4 = L10+L11+L12+L13;
+//-------------------------------/
 
+//各種 function
 let checked_dest = [];
 
 document.querySelector('#calc').addEventListener('click', calc);
@@ -105,7 +99,7 @@ function calc(){
 	checkboxes.forEach((checkbox) => {
 		checked_dest.push(checkbox.value);
 	});
-	//console.log(checked_dest);
+	console.log(checked_dest);
 
     if(checked_dest.length > 0){
         calcRoute();
@@ -143,12 +137,6 @@ function changeOrigin(){
 	}
 }
 
-
-
-//-------------------------------//
-
-
-
 class Rest_Info{
     constructor(location, name, icon)
     {
@@ -158,18 +146,14 @@ class Rest_Info{
     }
 }
 
-//餐廳
-const R1_yashuzhai = new Rest_Info({lat:24.794388261674445, lng: 121.00012480028795}, "雅素齋自然人文蔬食館","/build/icon/Picture1_ya.png");
-const R2_jingding = new Rest_Info({lat:24.80694440021254, lng: 120.96717814114272}, "井町日式蔬食料理", "/build/icon/Picture2_jing.png");
-const R3_jiazhen =  new Rest_Info({lat:24.799638469920698, lng: 120.95316545574171}, "家蓁素食自助餐", "/build/icon/Picture3_jia.png");
-const R4_zixin = new Rest_Info({lat:24.871209418461, lng: 120.993891846625}, "子欣素食", "/build/icon/Picture4_zi.png");
+//TODO: 餐廳資訊從 firebase 抓 (once)
+const R1_yashuzhai = new Rest_Info({lat:24.794388261674445, lng: 121.00012480028795}, "雅素齋自然人文蔬食館","./icon/Picture1_ya.png");
+const R2_jingding = new Rest_Info({lat:24.80694440021254, lng: 120.96717814114272}, "井町日式蔬食料理", "./icon/Picture2_jing.png");
+const R3_jiazhen =  new Rest_Info({lat:24.799638469920698, lng: 120.95316545574171}, "家蓁素食自助餐", "./icon/Picture3_jia.png");
+const R4_zixin = new Rest_Info({lat:24.871209418461, lng: 120.993891846625}, "子欣素食", "./icon/Picture4_zi.png");
 
+// 在地圖上標出餐廳位置
 let markers = [];
-addMarker(R1_yashuzhai);
-addMarker(R2_jingding);
-addMarker(R3_jiazhen);
-addMarker(R4_zixin);
-
 function addMarker(property){
     let icon = {
         url:property.icon,
@@ -201,6 +185,10 @@ function addMarker(property){
     //     //detailWindow.open(map, marker);
     // })
 }
+addMarker(R1_yashuzhai);
+addMarker(R2_jingding);
+addMarker(R3_jiazhen);
+addMarker(R4_zixin);
 
 function setMapOnAll(map){
     for(let i=0; i<markers.length; i++){
@@ -217,19 +205,20 @@ function changeMarker(){
     }
 }
 
-function calcRoute(){
+// 計算和推薦路線
+let waypts = [];
 
-    const waypts = [];
+function calcRoute(){
+    waypts = [];
     for(let i=0; i < checked_dest.length-1; i++){
         waypts.push({
             location: checked_dest[i],
             stopover:true
         });
     }
-    console.log("waypts: " + waypts);
+    // console.log("waypts: " + waypts);
     console.log("origin: " + document.getElementById("origin").value);
     console.log("dest: " + checked_dest[checked_dest.length-1]);
-
 
     directionsService
     .route({
@@ -265,8 +254,8 @@ function calcRoute(){
             totalDistance += distance;
             fee = Math.ceil(distance)*30;
             totalFee += fee;
-            console.log(route.legs[i].distance.text);
-            console.log("Distance: " + distance + ", fee: " + fee);
+            //console.log(route.legs[i].distance.text);
+            //console.log("Distance: " + distance + ", fee: " + fee);
 
             summaryPanel.innerHTML += "<b>Route Segment: " + routeSegment + "</b><br>";
             summaryPanel.innerHTML += route.legs[i].start_address + " to ";
@@ -277,14 +266,19 @@ function calcRoute(){
         }
 
         totalDistance = Math.round(totalDistance*10)/10;
-        console.log("Total Distance: " + totalDistance);
+        //console.log("Total Distance: " + totalDistance);
         document.getElementById("totalDistance").innerHTML = totalDistance + " km";
         document.getElementById("totalFee").innerHTML = "NTD" + totalFee;
     })
 }
 
-function clearRoute(){
-    from.value = "";
-    to.value = "";
-    go_label = true;
+document.querySelector('#extMap').addEventListener('click', extMap);
+function extMap(){
+    window.open("https://www.google.com.tw/maps/dir/新竹市東區中華路二段新竹火車站/30010新竹市東區大學路1001號國立陽明交通大學/新竹市東區光復路二段清華大學/新竹縣竹北市高鐵新竹站");
 }
+
+// function clearRoute(){
+//     from.value = "";
+//     to.value = "";
+//     go_label = true;
+// }

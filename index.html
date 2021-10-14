@@ -33,7 +33,7 @@
 			<div class="col">
 				<div class="row" style="padding-top: 10px;padding-bottom: 10px;">
 					<div class="col d-flex justify-content-end align-items-center">
-						<h4>Origin:</h4>
+						<h4>餐廳：</h4>
 					</div>
 					<div class="col d-flex align-items-center align-self-center">
 						<div class="select">
@@ -55,26 +55,20 @@
 				</div>
 				<div class="row" style="padding-top: 10px;padding-bottom: 10px;">
 					<div class="col d-flex justify-content-end align-items-center">
-						<h4>Destination:</h4>
+						<h4>送餐地點：</h4>
 					</div>
 					<div class="col d-flex align-items-center align-self-center">
 						<div class="row">
 							<div class="col" id="label_list">
-								<!-- <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-1"><label class="form-check-label" for="formCheck-1">Label 1</label></div>
-								<div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-6"><label class="form-check-label" for="formCheck-1">Label 2</label></div>
-								<div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-5"><label class="form-check-label" for="formCheck-1">Label 3</label></div>
-								<div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-4"><label class="form-check-label" for="formCheck-1">Label 4</label></div>
-								<div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-3"><label class="form-check-label" for="formCheck-1">Label 5</label></div>
-								<div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-2"><label class="form-check-label" for="formCheck-1">Label 6</label></div>
-								<div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-1"><label class="form-check-label" for="formCheck-1">Label 7</label></div> -->
+
 							</div>
 						</div>
 					</div>
 				</div>
 				<div class="row">
 					<div class="col d-flex justify-content-center align-items-lg-center">
-						<button class="btn btn-primary" type="button" id="calc" style="width: 150px;margin-right: 10px;margin-left: 10px;">Confirm</button>
-						<button class="btn btn-secondary" type="button" id="uncheck" style="width: 150px;margin-right: 10px;margin-left: 10px;">Clear Selection</button>
+						<button class="btn btn-primary" type="button" id="calc" style="width: 150px;margin-right: 10px;margin-left: 10px;">計算路線</button>
+						<button class="btn btn-secondary" type="button" id="uncheck" style="width: 150px;margin-right: 10px;margin-left: 10px;">清除選擇</button>
 					</div>
 				</div>
 			</div>
@@ -83,12 +77,12 @@
 		<div id="map"></div>
 
 		<div class="container" style="background: #86f8ff;">
-			<h1 class="text-center" style="padding-top: 5%;">Result</h1>
+			<h1 class="text-center" style="padding-top: 5%;">計算結果</h1>
 			<div class="row">
 				<div class="col">
 					<div class="row">
 						<div class="col">
-							<h3 class="text-start" style="padding-top: 5%;">Total Distance:</h3>
+							<h3 class="text-start" style="padding-top: 5%;">總里程數：</h3>
 						</div>
 						<div class="col">
 							<h3 style="padding-top: 5%" id="totalDistance">0 km</h3>
@@ -96,7 +90,7 @@
 					</div>
 					<div class="row">
 						<div class="col">
-							<h3 class="text-start" style="padding-top: 5%;">Total Deliver Fee:</h3>
+							<h3 class="text-start" style="padding-top: 5%;">運費總額：</h3>
 						</div>
 						<div class="col">
 							<h3 style="padding-top: 5%" id="totalFee">NTD 0</h3>
@@ -104,11 +98,14 @@
 					</div>
 				</div>
 			</div>
-			<div style="margin-top: 5%;"><a class="btn btn-primary" data-bs-toggle="collapse" aria-expanded="true" aria-controls="collapse-1" href="#collapse-1" role="button">Show 詳細路線</a>
+			<div style="margin-top: 5%;"><a class="btn btn-primary" data-bs-toggle="collapse" aria-expanded="true" aria-controls="collapse-1" href="#collapse-1" role="button">顯示詳細路線</a>
 				<div class="collapse show" id="collapse-1" style="padding-top: 5%;padding-bottom: 5%;">
 					
 				</div>
 			</div>
+			<div style="margin-top: 5%;"><a class="btn btn-primary" aria-expanded="true" id="extMap" role="button">開始導航</a>
+			</div>
+
 		</div>
 
 		<!-- <script type="module">
