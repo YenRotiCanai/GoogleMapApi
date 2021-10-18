@@ -1,16 +1,3 @@
-requirejs.config({
-    //By default load any module IDs from js/lib
-    baseUrl: 'scripts/app',
-    //except, if the module ID starts with "app",
-    //load it from the js/app directory. paths
-    //config is relative to the baseUrl, and
-    //never includes a ".js" extension since
-    //the paths config could be for a directory.
-    // paths: {
-    //     app: '../app'
-    // }
-});
-
 // firebase 資料庫相關
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.1.2/firebase-app.js";
 import { getDatabase, ref, set, update, remove, get, child } from "https://www.gstatic.com/firebasejs/9.1.2/firebase-database.js";
@@ -233,24 +220,24 @@ function changeMarker(){
 
 
 // 計算各家和餐廳的距離
-function calcDistance(){
-    var axios = require('axios');
+// function calcDistance(){
+//     var axios = require('axios');
 
-    var distanceConfig = {
-    method: 'get',
-    url: 'https://maps.googleapis.com/maps/api/distancematrix/json?origins=新竹火車站&destinations=國立陽明交通大學&key=AIzaSyBR2TL-7XibVRMbpjzkVDyLJzFQ390mAes',
-    headers: { }
-    };
+//     var distanceConfig = {
+//     method: 'get',
+//     url: 'https://maps.googleapis.com/maps/api/distancematrix/json?origins=新竹火車站&destinations=國立陽明交通大學&key=AIzaSyBR2TL-7XibVRMbpjzkVDyLJzFQ390mAes',
+//     headers: { }
+//     };
 
-    axios(distanceConfig)
-    .then(function (response) {
-    console.log(JSON.stringify(response.data));
-    })
-    .catch(function (error) {
-    console.log(error);
-    });
-}
-calcDistance();
+//     axios(distanceConfig)
+//     .then(function (response) {
+//     console.log(JSON.stringify(response.data));
+//     })
+//     .catch(function (error) {
+//     console.log(error);
+//     });
+// }
+// calcDistance();
 
 
 // 計算推薦路線
