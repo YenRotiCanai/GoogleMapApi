@@ -311,3 +311,9 @@ document.querySelector('#extMap').addEventListener('click', extMap);
 function extMap(){
     window.open("https://www.google.com.tw/maps/dir/新竹市東區中華路二段新竹火車站/30010新竹市東區大學路1001號國立陽明交通大學/新竹市東區光復路二段清華大學/新竹縣竹北市高鐵新竹站");
 }
+
+document.querySelector('#Hello').addEventListener('click', showHello);
+function showHello(){
+    console.log("H");
+    document.getElementById("Hello").innerText = "how r u";
+}
