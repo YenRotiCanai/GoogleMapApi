@@ -1,17 +1,27 @@
 const geocoder = new google.maps.Geocoder();
 const distanceService = new google.maps.DistanceMatrixService();
 
-var origin = '新竹火車站';
-var destination = '國立陽明交通大學光復校區';
+// let map = new google.maps.Map(document.getElementById('distance_map'), options);
 
-distanceService.getDistanceMatrix(
-    {
-      origins: [origin],
-      destinations: [destination],
-      travelMode: 'DRIVING',
-      avoidHighways: true,
-      avoidTolls: true,
-    }, callback);
+let origin = "";
+let destination = "";
+
+document.querySelector('#calc_btn').addEventListener('click', calcDistance);
+function calcDistance(){
+    origin = document.getElementById("origin").value;
+    destination = document.getElementById('destination').value;
+
+    console.log("ori: "+ origin +", dest: "+destination);
+
+    distanceService.getDistanceMatrix(
+        {
+          origins: [origin],
+          destinations: [destination],
+          travelMode: 'DRIVING',
+          avoidHighways: true,
+          avoidTolls: true,
+        }, callback);
+}
 
 function callback(response, status) {
     if (status == 'OK') {

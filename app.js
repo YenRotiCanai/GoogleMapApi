@@ -272,7 +272,7 @@ function calcRoute(){
         directionsRenderer.setDirections(response);
 
         const route = response.routes[0];
-        const summaryPanel = document.getElementById("collapse-1");
+        const summaryPanel = document.getElementById("nav_route_list");
 
         summaryPanel.innerHTML = "";
 
