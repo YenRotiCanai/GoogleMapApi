@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>計算距離</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-uWxY/CJNBR+1zjPWmfnSnVxwRheevXITnMqoEIeG1LJrdI0GlVs/9cVSyPYXdcSF" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700">
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+
+    <nav class="navbar navbar-light navbar-expand-md bg-success bg-gradient navigation-clean">
+        <div class="container"><a class="navbar-brand" href="./index.html">Health 21 Challenge</a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navcol-1">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link active" href="./calc_distance2.html">計算距離</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <form>
+        <div class="form-row">
+            <!-- <div class="col-auto" style="padding: 10px">
+                <label for="cName">姓名：</label>
+                <input type="text" class="form-control" id="nameInput">
+            </div>
+            <div class="col-auto" style="padding: 10px;">
+                <label for="cPhone">聯絡電話：</label>
+                <input type="number" class="form-control" id="phoneInput">
+            </div>
+            <div class="col-auto" style="padding: 10px;">
+                <label for="lineId">Line ID：</label>
+                <input type="number" class="form-control" id="LineIDInput">
+            </div> -->
+            <div class="col-auto" style="padding: 10px;">
+                <label for="selectRestaurant">餐廳：</label>
+                <select class="form-select" id="restaurantInput">
+                    <option value="0">請選擇餐廳</option>
+                    <option value="雅素齋自然人文蔬食館">雅素齋自然人文蔬食館</option>
+                    <option value="井町日式蔬食料理">井町日式蔬食料理</option>
+                    <option value="家蓁素食自助餐">家蓁素食自助餐</option>
+                    <option value="子欣素食">子欣素食</option>
+                </select>
+            </div>
+            <div class="col-auto" style="padding: 10px;">
+                <label for="destination">取餐地點：</label>
+                <input type="text" class="form-control" id="destInput">
+            </div>
+            <div class="col-auto" style="padding: 10px;">
+                <button type="button" class="btn btn-primary" id="calc_btn">計算距離與運費</button>
+            </div>
+            <div class="col-auto" style="padding: 10px;" id="dist_info_panel">
+
+            </div>
+            <div class="col-auto" style="padding: 10px;">
+                <button type="button" class="btn btn-primary" id="next_btn" disabled>下一步</button>
+            </div>
+        </div>
+    </form>
+    
+    <div id="distance_map" class="map">
+
+    </div>
+    
+    
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBR2TL-7XibVRMbpjzkVDyLJzFQ390mAes&region=TW&language=zh-TW"></script>
+    <script src="./distance2.js"></script>
+</body>
+</html>

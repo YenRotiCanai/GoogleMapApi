@@ -1,4 +1,9 @@
-#map{
-    height: 500px;
+.map{
+    height: 300px;
     width: 100%;
+}
+
+form{
+    margin: 20px auto;
+    width: 300px;
 }

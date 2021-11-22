@@ -14,25 +14,26 @@ directionsRenderer2.setMap(map);
 let origin = "";
 let destination = "";
 
-document.querySelector('#origin').addEventListener('change', changeMapCenter);
+document.querySelector('#restaurantInput').addEventListener('change', changeMapCenter);
 function changeMapCenter(){
     console.log("change ori");
+    console.log(document.getElementById("restaurantInput").value);
 }
 
 document.querySelector('#calc_btn').addEventListener('click', calcDistance);
 function calcDistance(){
-    origin = document.getElementById("origin").value;
-    destination = document.getElementById('destination').value;
+    origin = document.getElementById("restaurantInput").value;
+    destination = document.getElementById('destInput').value;
 
     console.log("ori: "+ origin +", dest: "+destination);
 
     directionsService2
     .route({
         origin:{
-            query: document.getElementById("origin").value,
+            query: origin,
         },
         destination:{
-            query: document.getElementById("destination").value,
+            query: destination,
         },
         travelMode: google.maps.TravelMode.DRIVING,
     })
@@ -44,11 +45,11 @@ function calcDistance(){
         infopanel.innerHTML = "";
 
         const dist = route.legs[0].distance.value/1000;
-        const fee = Math.ceil(dist)*30;
+        const fee = Math.ceil(dist)*10;
 
         infopanel.innerHTML += "<b>距離： </b>" + route.legs[0].distance.text + "<br>";
         infopanel.innerHTML += "NTD " + fee + "<br>";
     })
     
+    document.getElementById('next_btn').disabled = false;
 }
-
