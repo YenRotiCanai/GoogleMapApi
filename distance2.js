@@ -3,7 +3,8 @@
 
 let options = {
     zoom: 12,
-    center: {lat:24.82434674639735, lng:121.00141682492709}
+    center: {lat:24.82434674639735, lng:121.00141682492709},
+    streetViewControl: false
 }
 
 let map = new google.maps.Map(document.getElementById('distance_map'), options);
@@ -45,7 +46,7 @@ function calcDistance(){
         infopanel.innerHTML = "";
 
         const dist = route.legs[0].distance.value/1000;
-        const fee = Math.ceil(dist)*10;
+        const fee = Math.ceil(dist)*5;
 
         infopanel.innerHTML += "<b>距離： </b>" + route.legs[0].distance.text + "<br>";
         infopanel.innerHTML += "NTD " + fee + "<br>";
