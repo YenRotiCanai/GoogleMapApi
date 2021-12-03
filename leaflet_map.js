@@ -96,3 +96,19 @@ var layerControl = L.control.layers(overlays, null, {collapsed:false, sortLayers
 // 用邊界來把地圖置中
 let bounds = [[min_lat,min_lng],[max_lat,max_lng]];
 map.fitBounds(bounds)
+
+
+
+// 其他 function
+document.getElementById("area").addEventListener('change', ()=>{
+    const area = document.getElementById("area").value;
+    console.log(area);
+})
+
+let sheetID = document.getElementById("sheetID").value;
+let route_num = document.getElementById("route_num").value;
+
+document.getElementById("register_btn").addEventListener('click', ()=>{
+    console.log(sheetID);
+    console.log(route_num);
+})
