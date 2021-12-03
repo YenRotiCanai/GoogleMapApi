@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>路線圖</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-uWxY/CJNBR+1zjPWmfnSnVxwRheevXITnMqoEIeG1LJrdI0GlVs/9cVSyPYXdcSF" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+    integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+    crossorigin=""/>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700">
+    
+</head>
+<body>
+    <nav class="navbar navbar-light navbar-expand-md bg-success bg-gradient navigation-clean">
+        <div class="container">
+            <a class="navbar-brand" href="#">Health 21 Challenge</a>
+            <button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navcol-1">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link active" href="calc_distance2.html">計算距離</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="route_map.html">報名表登錄/路線圖</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container" style="padding-top: 10px;padding-bottom: 10px;">
+        <div class="row">
+            <div class="col">
+                <div><a class="btn btn-primary" data-bs-toggle="collapse" aria-expanded="true" aria-controls="collapse-1" href="#collapse-1" role="button">登錄報名資料表</a>
+                    <div class="collapse show" id="collapse-1">
+                        <div class="container" style="padding-top: 10px;padding-bottom: 10px;">
+                            <div class="row" style="background: #a0fff4;">
+                                <div class="col-md-4"><label class="col-form-label d-xl-flex justify-content-xl-center" style="font-size: 30px;font-weight: bold;">報名表登錄</label></div>
+                            </div>
+                            <div class="row" style="padding: 10px;">
+                                <div class="col-md-4 d-xl-flex justify-content-xl-end align-items-xl-center"><label class="col-form-label d-xl-flex">地區/和氣：</label></div>
+                                <div class="col-md-4 d-xl-flex justify-content-xl-start"><select style="padding: 10;">
+                                        <option value="undefined" selected>請選擇</option>
+                                        <option value="12">竹科</option>
+                                        <option value="13">香山</option>
+                                        <option value="14">東區</option>
+                                        <option value>竹北</option>
+                                        <option value>竹南</option>
+                                    </select></div>
+                            </div>
+                            <div class="row" style="padding: 10px;">
+                                <div class="col-md-4 d-xl-flex justify-content-xl-end align-items-xl-center"><label class="col-form-label">Google Sheet ID：</label></div>
+                                <div class="col-md-4 d-xl-flex justify-content-xl-start"><input type="text" /></div>
+                            </div>
+                            <div class="row" style="padding: 10px;">
+                                <div class="col-md-4 d-xl-flex justify-content-xl-end align-items-xl-center"><label class="col-form-label">路線數量：</label></div>
+                                <div class="col-md-4 col-xl-4 d-xl-flex justify-content-xl-start"><input type="number" /></div>
+                            </div>
+                            <div class="row">
+                                <div class="col d-xl-flex justify-content-xl-center"><label class="col-form-label" style="background: #eeeeee;padding: 11px 0px;padding-right: 20px;padding-left: 20px;">請在 google sheet 裡將 maptestfirebase-72508@appspot.gserviceaccount.com 加入共用並設為 “編輯者”<br /></label></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xl-4 offset-xl-4 d-xl-flex justify-content-xl-start" style="padding: 10px;padding-left: 15px;"><button class="btn btn-primary" type="button">登錄報名表</button></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div><a class="btn btn-primary" data-bs-toggle="collapse" aria-expanded="true" aria-controls="collapse-2" href="#collapse-2" role="button">外送路線圖</a>
+                    <div class="collapse show" id="collapse-2">
+                        <div class="container" style="padding-top: 10px;padding-bottom: 10px;">
+                            <div class="row" style="background: #a1ffdd;">
+                                <div class="col-md-4"><label class="col-form-label d-xl-flex justify-content-xl-center" style="font-size: 30px;font-weight: bold;">外送路線圖</label></div>
+                                <div class="col d-xl-flex justify-content-xl-start align-items-xl-center"><button class="btn btn-primary" type="button">更新地圖</button></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xl-12">
+                                    <div class="row" style="padding: 10px;">
+                                        <div class="col-md-4 col-xl-2 d-xl-flex justify-content-xl-end align-items-xl-center"><label class="col-form-label d-xl-flex">地區/和氣：</label></div>
+                                        <div class="col-md-4 col-xl-1 d-xl-flex justify-content-xl-start"><select style="padding: 10;">
+                                                <option value="undefined" selected>請選擇</option>
+                                                <option value="12">竹科</option>
+                                                <option value="13">香山</option>
+                                                <option value="14">東區</option>
+                                                <option value>竹北</option>
+                                                <option value>竹南</option>
+                                            </select></div>
+                                        <div class="col-md-4 col-xl-2 d-xl-flex justify-content-xl-end align-items-xl-center"><label class="col-form-label">路線數量：</label></div>
+                                        <div class="col-xl-1"><label class="col-form-label">Label</label></div>
+                                        <div class="col-xl-2 d-xl-flex justify-content-xl-end"><label class="col-form-label">Google Sheet ID：</label></div>
+                                        <div class="col-xl-3"><label class="col-form-label">Label</label></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col d-xl-flex justify-content-xl-center map" id="map"></iframe></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+    <!-- <div class="map" id="map"></div> -->
+
+    <!-- Make sure you put this AFTER Leaflet's CSS -->
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+    integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+    crossorigin=""></script>
+    
+    <script src="./leaflet_map.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+</body>
+</html>
