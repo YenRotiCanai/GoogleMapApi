@@ -114,33 +114,29 @@ let mapRouteNum = 0;
 let mapSheetID = "";
 
 
+// 登錄資料表
 document.getElementById("regBtn").addEventListener('click', ()=>{
+    
+    //取使用者輸入
     regArea = document.getElementById("regArea").value;
     regRouteNum = document.getElementById("regRouteNum").value;
     regSheetID = document.getElementById("regSheetID").value;
-    console.log(regArea);
-    console.log(regRouteNum);
-    console.log(regSheetID);
 
+    //轉成 json 格式
     let data = JSON.stringify({area: regArea, routeNum: regRouteNum, sheetID: regSheetID});
     console.log(data);
 
-    let request = fetch('http://127.0.0.1:8000/regSheet/', {
+    //post 到伺服器
+    let url = 'http://127.0.0.1:8000/regSheet/'
+    let request = fetch( url, {
         method: "POST", 
-        body: data,
+        body: encodeURI(data),
         headers: new Headers({
             'Content-Type': 'application/json'
         })
     });
-    
-    // request
-    // .then(response => response.json())
-    // .catch(error => console.error('Error:', error))
-    // .then(response=>{
-    //     console.log(response);
-    //     alert("資料登錄成功！")
-    // })
 
+    //伺服器回傳
     request
     .then(response => {
         if(response.ok){
@@ -151,21 +147,37 @@ document.getElementById("regBtn").addEventListener('click', ()=>{
     })
     .then(response=>{
         console.log(response);
-        alert("資料登錄成功！")
+        alert("資料登錄成功！"); //跳出小視窗
     }) 
     .catch(error => {
-        console.error(error)
-        alert(error)
+        console.error(error);
+        alert(error); //跳出錯誤資訊
     })
 })
 
 
-// document.getElementById("mapRouteNum").textContent = response.routeNum;
-        // document.getElementById("mapSheetID").textContent = response.sheetID;
-
+// 取資料表資料
 document.getElementById("mapArea").addEventListener('change', ()=>{
-    document.getElementById("mapRouteNum").textContent = regRouteNum;
-    document.getElementById("mapSheetID").textContent = regSheetID;
-    console.log(document.getElementById("mapRouteNum").textContent);
-    console.log(document.getElementById("mapSheetID").textContent);
+
+    let mapValue = document.getElementById("mapArea").value;
+
+    let url = 'http://127.0.0.1:8000/getSheet/' + mapValue ;
+    let request = fetch( url, {method: "GET"});
+
+    request
+    .then(response =>{
+        if(response.ok){
+            return response.json();
+        }else{
+            throw new Error('未找到該地區資料表！請先登錄資料表')
+        }
+    })
+    .then(response =>{
+        document.getElementById("mapRouteNum").textContent = response.routeNum;
+        document.getElementById("mapSheetID").textContent = response.sheetID;
+    })
+    // document.getElementById("mapRouteNum").textContent = regRouteNum;
+    // document.getElementById("mapSheetID").textContent = regSheetID;
+    // console.log(document.getElementById("mapRouteNum").textContent);
+    // console.log(document.getElementById("mapSheetID").textContent);
 })
