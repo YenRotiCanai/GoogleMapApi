@@ -14,10 +14,8 @@ function upload_file(){
     })
 }
 
-
 function show_file(){
     // console.log('btn clicked')
-
     Papa.parse(document.getElementById('choose-file').files[0],{
         download: true,
         header: false,

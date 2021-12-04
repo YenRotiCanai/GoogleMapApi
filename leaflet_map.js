@@ -100,10 +100,6 @@ map.fitBounds(bounds)
 
 
 // 其他 function
-// document.getElementById("mapArea").addEventListener('change', ()=>{
-//     const area = document.getElementById("area").value;
-//     console.log(area);
-// })
 
 let regArea = "";
 let regRouteNum = 0;
@@ -127,10 +123,10 @@ document.getElementById("regBtn").addEventListener('click', ()=>{
     console.log(data);
 
     //post 到伺服器
-    let url = 'http://127.0.0.1:8000/regSheet/'
-    let request = fetch( url, {
+    let url = 'http://127.0.0.1:8000/regSheet/';
+    let request = fetch('http://127.0.0.1:8000/regSheet/', {
         method: "POST", 
-        body: encodeURI(data),
+        body: data,
         headers: new Headers({
             'Content-Type': 'application/json'
         })
@@ -156,13 +152,17 @@ document.getElementById("regBtn").addEventListener('click', ()=>{
 })
 
 
-// 取資料表資料
+//取資料表資料
 document.getElementById("mapArea").addEventListener('change', ()=>{
 
+    //要取的區域
     let mapValue = document.getElementById("mapArea").value;
 
-    let url = 'http://127.0.0.1:8000/getSheet/' + mapValue ;
-    let request = fetch( url, {method: "GET"});
+    //從伺服器 get
+    let url = 'http://127.0.0.1:8000/getSheet/' + mapValue;
+    var request = fetch( url, {
+        method: 'GET'
+    });
 
     request
     .then(response =>{
@@ -175,6 +175,10 @@ document.getElementById("mapArea").addEventListener('change', ()=>{
     .then(response =>{
         document.getElementById("mapRouteNum").textContent = response.routeNum;
         document.getElementById("mapSheetID").textContent = response.sheetID;
+    })
+    .catch(error => {
+        console.error(error);
+        alert(error); //跳出錯誤資訊
     })
     // document.getElementById("mapRouteNum").textContent = regRouteNum;
     // document.getElementById("mapSheetID").textContent = regSheetID;
