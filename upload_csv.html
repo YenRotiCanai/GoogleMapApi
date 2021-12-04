@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form class="form-inline">
+        <div class="form-group">
+          <label for="files">Upload a CSV formatted file:</label>
+          <input type="file" id="choose-file"  class="form-control" accept=".csv" onchange="show_file()" required />
+        </div>
+        <div class="form-group">
+         <button type="button" id="upload-file">Upload File</button>
+         </div>
+    </form>
+    <table id=csv_table>
+
+    </table>
+
+    <script src="./papaparse.min.js"></script>
+    <script src="./upload.js"></script>
+    
+</body>
+</html>

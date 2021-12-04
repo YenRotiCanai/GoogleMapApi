@@ -67,7 +67,9 @@ function getAddress(cName){
 //地圖設定
 let options = {
     center: {lat:24.82434674639735, lng:121.00141682492709},
-    zoom: 12
+    zoom: 12,
+    mapTypeControl: false,
+    streetViewControl: false
 }
 
 //創新的地圖
@@ -171,8 +173,6 @@ function addMarker(property){
     let icon = {
         url:property.icon,
         scaledSize: new google.maps.Size(100,100),
-        origin: new google.maps.Point(0,0),
-        anchor: new google.maps.Point(0,0)
     }
     const marker = new google.maps.Marker({
         map: map,
@@ -242,6 +242,7 @@ function changeMarker(){
 
 // 計算推薦路線
 let wayptsforRoute = [];
+let navResult = "https://www.google.com.tw/maps/dir/";
 
 function calcRoute(){
     wayptsforRoute = [];
@@ -272,7 +273,7 @@ function calcRoute(){
         directionsRenderer.setDirections(response);
 
         const route = response.routes[0];
-        const summaryPanel = document.getElementById("collapse-1");
+        const summaryPanel = document.getElementById("nav_route_list");
 
         summaryPanel.innerHTML = "";
 
@@ -281,16 +282,16 @@ function calcRoute(){
         let fee = 0;
         let totalFee = 0;
 
+        navResult += route.legs[0].start_address;
+
         // For each route, display summary information.
         for (let i = 0; i < route.legs.length; i++) {
             const routeSegment = i + 1;
 
             distance = route.legs[i].distance.value/1000;
             totalDistance += distance;
-            fee = Math.ceil(distance)*30;
+            fee = Math.ceil(distance)*10;
             totalFee += fee;
-            //console.log(route.legs[i].distance.text);
-            //console.log("Distance: " + distance + ", fee: " + fee);
 
             summaryPanel.innerHTML += "<b>Route Segment: " + routeSegment + "</b><br>";
             summaryPanel.innerHTML += route.legs[i].start_address + " to ";
@@ -298,7 +299,10 @@ function calcRoute(){
             summaryPanel.innerHTML += route.legs[i].distance.text + " ";
             summaryPanel.innerHTML += "NTD " + fee + "<br><br>";
             
+            navResult += "/"+route.legs[i].end_address;
         }
+
+        console.log(navResult);
 
         totalDistance = Math.round(totalDistance*10)/10;
         //console.log("Total Distance: " + totalDistance);
@@ -307,7 +311,8 @@ function calcRoute(){
     })
 }
 
+//跳到 google map app 導航
 document.querySelector('#extMap').addEventListener('click', extMap);
 function extMap(){
-    window.open("https://www.google.com.tw/maps/dir/新竹市東區中華路二段新竹火車站/30010新竹市東區大學路1001號國立陽明交通大學/新竹市東區光復路二段清華大學/新竹縣竹北市高鐵新竹站");
+    window.open(navResult);
 }

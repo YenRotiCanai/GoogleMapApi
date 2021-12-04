@@ -14,16 +14,7 @@
 			<div class="container"><a class="navbar-brand" href="#">Health 21 Challenge</a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
 				<div class="collapse navbar-collapse" id="navcol-1">
 					<ul class="navbar-nav ms-auto">
-						<li class="nav-item"><a class="nav-link active" href="#">First Item</a></li>
-						<li class="nav-item"><a class="nav-link" href="#">Second Item</a></li>
-						<li class="nav-item"><a class="nav-link" href="#">Third Item</a></li>
-						<li class="nav-item dropdown"><a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#">Dropdown </a>
-							<div class="dropdown-menu">
-								<a class="dropdown-item" href="#">First Item</a>
-								<a class="dropdown-item" href="#">Second Item</a>
-								<a class="dropdown-item" href="#">Third Item</a>
-							</div>
-						</li>
+						<li class="nav-item"><a class="nav-link active" href="calc_distance2.html">計算距離</a></li>
 					</ul>
 				</div>
 			</div>
@@ -38,7 +29,7 @@
 					<div class="col d-flex align-items-center align-self-center">
 						<div class="select">
 							<select class="form-select" id="origin" aria-label="Default select example">
-								<option value="0">請選擇餐廳</option>
+								<option value="0">選擇餐廳</option>
 								<option value="雅素齋自然人文蔬食館">雅素齋自然人文蔬食館</option>
 								<option value="井町日式蔬食料理">井町日式蔬食料理</option>
 								<option value="家蓁素食自助餐">家蓁素食自助餐</option>
@@ -65,7 +56,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="row">
+				<div class="row" style="padding: 20px;">
 					<div class="col d-flex justify-content-center align-items-lg-center">
 						<button class="btn btn-primary" type="button" id="calc" style="width: 150px;margin-right: 10px;margin-left: 10px;">計算路線</button>
 						<button class="btn btn-secondary" type="button" id="uncheck" style="width: 150px;margin-right: 10px;margin-left: 10px;">清除選擇</button>
@@ -74,7 +65,7 @@
 			</div>
 		</div>
 		<!-- <iframe allowfullscreen="" frameborder="0" src="https://cdn.bootstrapstudio.io/placeholders/map.html" width="100%" height="400"></iframe> -->
-		<div id="map"></div>
+		<div id="map" class="map"></div>
 
 		<div class="container" style="background: #86f8ff;">
 			<h1 class="text-center" style="padding-top: 5%;">計算結果</h1>
@@ -99,7 +90,7 @@
 				</div>
 			</div>
 			<div style="margin-top: 5%;"><a class="btn btn-primary" data-bs-toggle="collapse" aria-expanded="true" aria-controls="collapse-1" href="#collapse-1" role="button">顯示詳細路線</a>
-				<div class="collapse show" id="collapse-1" style="padding-top: 5%;padding-bottom: 5%;">
+				<div class="collapse show" id="nav_route_list" style="padding-top: 5%;padding-bottom: 5%;">
 					
 				</div>
 			</div>
@@ -126,6 +117,7 @@
         
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBR2TL-7XibVRMbpjzkVDyLJzFQ390mAes&region=TW&language=zh-TW">
 		</script>
+		
         <script type="module" src="./app.js" ></script>
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     </body>

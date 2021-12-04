@@ -1,6 +1,6 @@
 // firebase 資料庫相關
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.1.2/firebase-app.js";
-import { getDatabase, ref, set, update, remove } from "https://www.gstatic.com/firebasejs/9.1.2/firebase-database.js";
+import { getDatabase, ref, set, update, remove, get, child } from "https://www.gstatic.com/firebasejs/9.1.2/firebase-database.js";
 
 const firebaseConfig = {
     apiKey: "AIzaSyA90qw12czw-1Sqhld4HknBD4gYeUmNMP0",
@@ -49,12 +49,27 @@ function addContestant(name, phone, address){
 
 // updateData('梅竹山莊', '035718366', '300新竹市東區大學路50號300')
 
-// let go_label = true;
+// readData
+function getAddress(cName){
+    const dbRef = ref(getDatabase());
+    get(child(dbRef, 'contestant/'+cName)).then((snapshot)=>{
+        if(snapshot.exists()){
+            console.log(snapshot.val().cAddress);
+        }else{
+            console.log("No data available");
+        }
+    })
+}
+
+// getAddress('梅竹山莊');
+
 
 //地圖設定
 let options = {
     center: {lat:24.82434674639735, lng:121.00141682492709},
-    zoom: 12
+    zoom: 12,
+    mapTypeControl: false,
+    streetViewControl: false
 }
 
 //創新的地圖
@@ -158,8 +173,6 @@ function addMarker(property){
     let icon = {
         url:property.icon,
         scaledSize: new google.maps.Size(100,100),
-        origin: new google.maps.Point(0,0),
-        anchor: new google.maps.Point(0,0)
     }
     const marker = new google.maps.Marker({
         map: map,
@@ -205,18 +218,41 @@ function changeMarker(){
     }
 }
 
-// 計算和推薦路線
-let waypts = [];
+
+// 計算各家和餐廳的距離
+// function calcDistance(){
+//     var axios = require('axios');
+
+//     var distanceConfig = {
+//     method: 'get',
+//     url: 'https://maps.googleapis.com/maps/api/distancematrix/json?origins=新竹火車站&destinations=國立陽明交通大學&key=AIzaSyBR2TL-7XibVRMbpjzkVDyLJzFQ390mAes',
+//     headers: { }
+//     };
+
+//     axios(distanceConfig)
+//     .then(function (response) {
+//     console.log(JSON.stringify(response.data));
+//     })
+//     .catch(function (error) {
+//     console.log(error);
+//     });
+// }
+// calcDistance();
+
+
+// 計算推薦路線
+let wayptsforRoute = [];
+let navResult = "https://www.google.com.tw/maps/dir/";
 
 function calcRoute(){
-    waypts = [];
+    wayptsforRoute = [];
     for(let i=0; i < checked_dest.length-1; i++){
-        waypts.push({
+        wayptsforRoute.push({
             location: checked_dest[i],
             stopover:true
         });
     }
-    // console.log("waypts: " + waypts);
+    // console.log("wayptsforRoute: " + wayptsforRoute);
     console.log("origin: " + document.getElementById("origin").value);
     console.log("dest: " + checked_dest[checked_dest.length-1]);
 
@@ -228,7 +264,7 @@ function calcRoute(){
         destination:{
             query: checked_dest[checked_dest.length-1],
         },
-        waypoints: waypts,
+        waypoints: wayptsforRoute,
         optimizeWaypoints: true,
         travelMode: google.maps.TravelMode.DRIVING,
         unitSystem: google.maps.UnitSystem.METRIC
@@ -237,7 +273,7 @@ function calcRoute(){
         directionsRenderer.setDirections(response);
 
         const route = response.routes[0];
-        const summaryPanel = document.getElementById("collapse-1");
+        const summaryPanel = document.getElementById("nav_route_list");
 
         summaryPanel.innerHTML = "";
 
@@ -246,16 +282,16 @@ function calcRoute(){
         let fee = 0;
         let totalFee = 0;
 
+        navResult += route.legs[0].start_address;
+
         // For each route, display summary information.
         for (let i = 0; i < route.legs.length; i++) {
             const routeSegment = i + 1;
 
             distance = route.legs[i].distance.value/1000;
             totalDistance += distance;
-            fee = Math.ceil(distance)*30;
+            fee = Math.ceil(distance)*10;
             totalFee += fee;
-            //console.log(route.legs[i].distance.text);
-            //console.log("Distance: " + distance + ", fee: " + fee);
 
             summaryPanel.innerHTML += "<b>Route Segment: " + routeSegment + "</b><br>";
             summaryPanel.innerHTML += route.legs[i].start_address + " to ";
@@ -263,7 +299,10 @@ function calcRoute(){
             summaryPanel.innerHTML += route.legs[i].distance.text + " ";
             summaryPanel.innerHTML += "NTD " + fee + "<br><br>";
             
+            navResult += "/"+route.legs[i].end_address;
         }
+
+        console.log(navResult);
 
         totalDistance = Math.round(totalDistance*10)/10;
         //console.log("Total Distance: " + totalDistance);
@@ -272,13 +311,8 @@ function calcRoute(){
     })
 }
 
+//跳到 google map app 導航
 document.querySelector('#extMap').addEventListener('click', extMap);
 function extMap(){
-    window.open("https://www.google.com.tw/maps/dir/新竹市東區中華路二段新竹火車站/30010新竹市東區大學路1001號國立陽明交通大學/新竹市東區光復路二段清華大學/新竹縣竹北市高鐵新竹站");
+    window.open(navResult);
 }
-
-// function clearRoute(){
-//     from.value = "";
-//     to.value = "";
-//     go_label = true;
-// }
