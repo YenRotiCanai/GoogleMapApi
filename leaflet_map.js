@@ -100,15 +100,72 @@ map.fitBounds(bounds)
 
 
 // 其他 function
-document.getElementById("area").addEventListener('change', ()=>{
-    const area = document.getElementById("area").value;
-    console.log(area);
+// document.getElementById("mapArea").addEventListener('change', ()=>{
+//     const area = document.getElementById("area").value;
+//     console.log(area);
+// })
+
+let regArea = "";
+let regRouteNum = 0;
+let regSheetID = "";
+
+let mapArea = "";
+let mapRouteNum = 0;
+let mapSheetID = "";
+
+
+document.getElementById("regBtn").addEventListener('click', ()=>{
+    regArea = document.getElementById("regArea").value;
+    regRouteNum = document.getElementById("regRouteNum").value;
+    regSheetID = document.getElementById("regSheetID").value;
+    console.log(regArea);
+    console.log(regRouteNum);
+    console.log(regSheetID);
+
+    let data = JSON.stringify({area: regArea, routeNum: regRouteNum, sheetID: regSheetID});
+    console.log(data);
+
+    let request = fetch('http://127.0.0.1:8000/regSheet/', {
+        method: "POST", 
+        body: data,
+        headers: new Headers({
+            'Content-Type': 'application/json'
+        })
+    });
+    
+    // request
+    // .then(response => response.json())
+    // .catch(error => console.error('Error:', error))
+    // .then(response=>{
+    //     console.log(response);
+    //     alert("資料登錄成功！")
+    // })
+
+    request
+    .then(response => {
+        if(response.ok){
+            return response.json();
+        }else{
+            throw new Error('資料登錄失敗！\n請確保資料輸入正確');
+        }
+    })
+    .then(response=>{
+        console.log(response);
+        alert("資料登錄成功！")
+    }) 
+    .catch(error => {
+        console.error(error)
+        alert(error)
+    })
 })
 
-let sheetID = document.getElementById("sheetID").value;
-let route_num = document.getElementById("route_num").value;
 
-document.getElementById("register_btn").addEventListener('click', ()=>{
-    console.log(sheetID);
-    console.log(route_num);
+// document.getElementById("mapRouteNum").textContent = response.routeNum;
+        // document.getElementById("mapSheetID").textContent = response.sheetID;
+
+document.getElementById("mapArea").addEventListener('change', ()=>{
+    document.getElementById("mapRouteNum").textContent = regRouteNum;
+    document.getElementById("mapSheetID").textContent = regSheetID;
+    console.log(document.getElementById("mapRouteNum").textContent);
+    console.log(document.getElementById("mapSheetID").textContent);
 })
