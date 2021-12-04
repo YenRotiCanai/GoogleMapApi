@@ -123,8 +123,9 @@ document.getElementById("regBtn").addEventListener('click', ()=>{
     console.log(data);
 
     //post 到伺服器
-    let url = 'http://127.0.0.1:8000/regSheet/';
-    let request = fetch('http://127.0.0.1:8000/regSheet/', {
+    // let url = 'http://127.0.0.1:8000/regSheet/';
+    let url = 'https://health21-fastapi.herokuapp.com/regSheet/';
+    let request = fetch(url, {
         method: "POST", 
         body: data,
         headers: new Headers({
@@ -163,7 +164,8 @@ document.getElementById("mapArea").addEventListener('change', ()=>{
     let mapValue = document.getElementById("mapArea").value;
 
     //從伺服器 get
-    let url = 'http://127.0.0.1:8000/getSheet/' + mapValue;
+    // let url = 'http://127.0.0.1:8000/getSheet/' + mapValue;
+    let url = 'https://health21-fastapi.herokuapp.com/getSheet/' + mapValue;
     var request = fetch( url, {
         method: 'GET'
     });
