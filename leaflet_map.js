@@ -66,7 +66,7 @@ document.getElementById("mapArea").addEventListener('change', ()=>{
     //從伺服器 get
     let url = 'http://127.0.0.1:8000/getSheet/' + mapValue;
     // let url = 'https://health21-fastapi.herokuapp.com/getSheet/' + mapValue;
-    var request = fetch( url, {
+    let request = fetch( url, {
         method: 'GET'
     });
 
@@ -91,30 +91,87 @@ document.getElementById("mapArea").addEventListener('change', ()=>{
     })
 })
 
-function getAreaSelection(){
+let r = Object();
+
+// 抓 db 的和氣資料，設成選單
+async function getAreaSelection(){
     let url = 'http://127.0.0.1:8000/getMapArea/';
     // let url = 'https://health21-fastapi.herokuapp.com/getSheet/' + mapValue;
-    var request = fetch( url, {
-        method: 'GET'
-    });
+    
+    let request = fetch( url, {method: 'GET'});
 
-    request
-    .then(response =>response.json())
+    await request
     .then(response =>{
+        // console.log(response);
+        return response.json();
+    })
+    .then(response =>{
+        r = response;
         console.log(response);
-        let selArea = document.getElementById('mapArea');
-        let str = '<option value="please select" selected>請選擇</option>';
-
-        for(var i in response){
-            str += '<option value="' + i + '">' + i + '</option>'
-        }
-
-        selArea.innerHTML = str;
-
+        // re = response;
+        // let selArea = document.getElementById('mapArea');
+        // let str = '<option value="please select" selected>請選擇</option>';
+        // for(var i in response){
+        //     str += '<option value="' + i + '">' + i + '</option>'
+        // }
+        // selArea.innerHTML = str;
+        // return response; //為什麼不能return
     })
 }
 
-getAreaSelection()
+async function getRe(){
+    console.log('123');
+    await getAreaSelection();
+    console.log(r);
+}
+
+getRe();
+console.log(r);
+
+// let selectArea = async () =>{
+//     let re = await getAreaSelection();
+//     return re;
+// } 
+// // console.log(selectArea);
+// selectArea()
+// .then(string =>{
+//     console.log(string);
+// })
+
+
+
+// console.log(getAreaSelection());
+// console.log(re);
+
+// 抓 db 的和氣資料，設成選單
+// function getAreaSelection(){
+//     let url = 'http://127.0.0.1:8000/getMapArea/';
+//     // let url = 'https://health21-fastapi.herokuapp.com/getSheet/' + mapValue;
+    
+//     let re = fetch( url, {
+//         method: 'GET'
+//     })
+//     .then(response =>response.json())
+//     .then(response =>{
+//         console.log(response);
+//         // re = response;
+//         // let res = response;
+//         // console.log(res);
+//         // selectArea = response;
+//         let selArea = document.getElementById('mapArea');
+//         let str = '<option value="please select" selected>請選擇</option>';
+//         for(var i in response){
+//             str += '<option value="' + i + '">' + i + '</option>'
+//         }
+//         selArea.innerHTML = str;
+//         return response; //為什麼不能return
+//     })
+//     return re;
+// }
+
+// console.log(getAreaSelection());
+// // console.log(re);
+
 
 // var map = L.map('map').setView([24.82434674639735, 121.00141682492709], 13);
 
