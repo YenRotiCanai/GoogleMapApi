@@ -89,15 +89,32 @@ document.getElementById("mapArea").addEventListener('change', ()=>{
         console.error(error);
         alert(error); //跳出錯誤資訊
     })
-
-    // console.log(mapJson)
-    // drawMap(mapJson);
-    // document.getElementById("mapRouteNum").textContent = regRouteNum;
-    // document.getElementById("mapSheetID").textContent = regSheetID;
-    // console.log(document.getElementById("mapRouteNum").textContent);
-    // console.log(document.getElementById("mapSheetID").textContent);
 })
 
+function getAreaSelection(){
+    let url = 'http://127.0.0.1:8000/getMapArea/';
+    // let url = 'https://health21-fastapi.herokuapp.com/getSheet/' + mapValue;
+    var request = fetch( url, {
+        method: 'GET'
+    });
+
+    request
+    .then(response =>response.json())
+    .then(response =>{
+        console.log(response);
+        let selArea = document.getElementById('mapArea');
+        let str = '<option value="please select" selected>請選擇</option>';
+
+        for(var i in response){
+            str += '<option value="' + i + '">' + i + '</option>'
+        }
+
+        selArea.innerHTML = str;
+
+    })
+}
+
+getAreaSelection()
 
 // var map = L.map('map').setView([24.82434674639735, 121.00141682492709], 13);
 
