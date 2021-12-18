@@ -91,7 +91,7 @@ function showMap() {
 
         // //從伺服器 get
         // let url = "http://127.0.0.1:8000/getSheet";
-        let url = 'https://health21-fastapi.herokuapp.com/getSheet/' + mapValue;
+        let url = 'https://health21-fastapi.herokuapp.com/getSheet/';
         let request = fetch(url, {
             method: "POST",
             body: JSON.stringify({ sheetUrl }),
@@ -123,7 +123,7 @@ let sheetObject = null; // {}
 // 抓 db 的和氣資料，設成選單
 function getAreaSelection() {
     // let url = "http://127.0.0.1:8000/getMapArea/";
-    let url = 'https://health21-fastapi.herokuapp.com/getSheet/' + mapValue;
+    let url = 'https://health21-fastapi.herokuapp.com/getMapArea/';
 
     let request = fetch(url, { method: "GET" });
 
