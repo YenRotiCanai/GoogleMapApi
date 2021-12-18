@@ -33,25 +33,27 @@
         </div>
         <div id="collapse-1" class="collapse show">
             <div class="row" style="padding: 10px; padding-bottom: 5px;">
-                <div class="col-5 col-md-3 col-lg-3 col-xl-2 d-sm-flex d-md-flex d-xl-flex justify-content-sm-end justify-content-md-end justify-content-xl-end align-items-xl-center"><label class="col-form-label d-xl-flex">地區/和氣：</label></div>
+                <div class="col-5 col-md-3 col-lg-3 col-xl-2 d-sm-flex d-md-flex d-xl-flex justify-content-sm-end justify-content-md-end justify-content-xl-end align-items-xl-center"><label class="col-form-label d-xl-flex">和氣及餐廳:</label></div>
                 <div class="col-7 col-md-2 col-lg-2 col-xl-1 d-flex d-sm-flex align-items-center align-items-sm-center">
                     <select id="regArea" style="padding: 10;">
                         <option value="please select" selected>請選擇</option>
                         <option value="新湖">新湖</option>
                         <option value="東區">東區</option>
-                        <option value="竹科">竹科</option>
+                        <option value="竹科雅素齋">竹科雅素齋</option>
+                        <option value="竹科也果蔬食竹科店">竹科也果蔬食</option>
+                        <option value="竹科怡客咖啡">竹科怡客咖啡</option>
                         <option value="香山">香山</option>
                         <option value="竹北">竹北</option>
                         <option value="竹南">竹南</option>
                     </select></div>
                 <div class="col-5 col-md-2 col-xl-2 col-xxl-1 d-sm-flex d-xl-flex justify-content-sm-end justify-content-xl-end align-items-xl-center">
-                    <label class="col-form-label">路線數量：</label></div>
+                    <label class="col-form-label">路線數量:</label></div>
                 <div class="col-7 col-md-4 col-lg-4 col-xl-1 d-flex d-sm-flex d-md-flex d-lg-flex d-xxl-flex align-items-center align-items-sm-center align-items-md-center align-items-lg-center align-items-xxl-center">
                     <input id="regRouteNum" type="number" style="width: 50px;height: 25px;" /></div>
                 <div class="col-12 col-sm-5 col-md-3 col-xl-2 col-xxl-2 d-sm-flex d-md-flex d-xl-flex justify-content-sm-end justify-content-md-end justify-content-xl-end">
-                    <label class="col-form-label">Google Sheet ID：</label></div>
+                    <label class="col-form-label">Google Sheet 網址:</label></div>
                 <div class="col-12 col-sm-7 col-md-8 col-xl-4 col-xxl-5 d-flex d-sm-flex d-md-flex d-lg-flex d-xxl-flex align-items-center align-items-sm-center align-items-md-center align-items-lg-center justify-content-xxl-start align-items-xxl-center">
-                    <input id="regSheetID" type="text" style="width: 300px;height: 25px;" /></div>
+                    <input id="regSheetUrl" type="text" style="width: 300px;height: 25px;" /></div>
             </div>
             <div class="row" style="padding: 10px; padding-top: 5px;">
                 <div class="col-md-11 col-lg-10 col-xl-9 col-xxl-9 d-lg-flex d-xl-flex d-xxl-flex justify-content-lg-center align-items-lg-center justify-content-xl-center align-items-xl-center justify-content-xxl-end align-items-xxl-center" style="padding: 0px;"><label class="col-form-label" style="background: #eeeeee;padding: 10px 10px;">請在 google sheet 裡將 maptestfirebase-72508@appspot.gserviceaccount.com 加入共用並設為 “編輯者”<br /></label></div>
@@ -70,7 +72,7 @@
             <div class="row">
                 <div class="col-xl-12">
                     <div class="row" style="padding: 10px;padding-bottom: 5px;">
-                        <div class="col-5 col-md-3 col-lg-3 col-xl-2 d-sm-flex d-md-flex d-xl-flex justify-content-sm-end justify-content-md-end justify-content-xl-end align-items-xl-center"><label class="col-form-label d-xl-flex">地區/和氣：</label></div>
+                        <div class="col-5 col-md-3 col-lg-3 col-xl-2 d-sm-flex d-md-flex d-xl-flex justify-content-sm-end justify-content-md-end justify-content-xl-end align-items-xl-center"><label class="col-form-label d-xl-flex">和氣及餐廳:</label></div>
                         <div class="col-7 col-md-2 col-lg-2 col-xl-1 d-flex d-sm-flex align-items-center align-items-sm-center">
                             <select id="mapArea" style="padding: 10;">
                                 <option value="please select" selected>請選擇</option>
@@ -82,15 +84,15 @@
                                 <option value="竹南">竹南</option>
                             </select></div>
                         <div class="col-5 col-md-2 col-xl-2 col-xxl-1 d-sm-flex d-xl-flex justify-content-sm-end justify-content-xl-end align-items-xl-center">
-                            <label class="col-form-label">路線數量：</label></div>
+                            <label class="col-form-label">路線數量:</label></div>
                         <div class="col-7 col-md-2 col-lg-4 col-xl-1">
                             <label id="mapRouteNum" class="col-form-label"></label></div>
                     </div>
                     <div class="row" style="padding: 5px 10px;">
                         <div class="col-12 col-sm-5 col-md-3 col-xl-2 col-xxl-2 d-sm-flex d-md-flex d-xl-flex justify-content-sm-end justify-content-md-end justify-content-xl-end">
-                            <label class="col-form-label">Google Sheet ID：</label></div>
+                            <label class="col-form-label">Google Sheet 網址:</label></div>
                         <div class="col-12 col-sm-7 col-md-9 col-xl-6 col-xxl-5">
-                            <label id="mapSheetID" class="col-form-label text-break" style="max-width: 100%;"></label></div>
+                            <label id="mapSheetUrl" class="col-form-label text-break" style="max-width: 100%;"></label></div>
                     </div>
                 </div>
             </div>
@@ -99,7 +101,10 @@
                 <div class="col-md-11 col-lg-2 col-xl-2 col-xxl-3 d-lg-flex justify-content-lg-start" style="padding: 10px 10px;">
                     <button id="mapBtn" class="btn btn-primary" type="button">更新地圖</button></div>
             </div>
-            <div class="row">
+            <div class="accordion" id="routeDetail">
+
+            </div>
+            <div class="row" id="mapdiv">
                 <!-- <div class="col d-xl-flex justify-content-xl-center"><iframe allowfullscreen frameborder="0" src="https://cdn.bootstrapstudio.io/placeholders/map.html" width="100%" height="400"></iframe></div> -->
                 <div class="col d-xl-flex justify-content-xl-center map" id="map"></div>
             </div>
@@ -115,6 +120,8 @@
     crossorigin=""></script>
     
     <script src="./leaflet_map.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </body>
 </html>
